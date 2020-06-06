@@ -1,0 +1,38 @@
+stages:
+  - test
+  - build
+  - deploy
+
+base:
+  environment:
+    APPLICATION: some-app
+    ENVIRONMENT: development
+    DOMAIN: "{{ .Environment.ENVIRONMENT }}.example.com"
+  image: alpine
+  cache:
+    - src: vendor/
+      scope: branch
+      ttl: 1h
+
+test:
+  stage: test
+  environment:
+    VERBOSE: "true"
+  commands:
+    - make test
+
+container:
+  stage: build
+  commands:
+    - make build
+    - make docker
+
+container:
+  stage: build
+  commands:
+    - make assets
+
+deploy:
+  stage: deploy
+  commands:
+    - make deploy
