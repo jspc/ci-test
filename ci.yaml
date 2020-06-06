@@ -8,7 +8,7 @@ base:
     APPLICATION: some-app
     ENVIRONMENT: development
     DOMAIN: "{{ .Environment.ENVIRONMENT }}.example.com"
-  image: alpine
+  image: jspc/ci-worker
   cache:
     - src: vendor/
       scope: branch
