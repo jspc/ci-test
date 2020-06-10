@@ -1,11 +1,10 @@
 .PHONY: test
 test:
-	echo "I have no tests <3"
-	true
+	go test -v
 
 .PHONY: build
 build:
-	touch binary
+	go build
 
 .PHONY: docker
 docker:
